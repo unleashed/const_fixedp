@@ -173,5 +173,19 @@ mod test {
 
             Ok(())
         }
+
+        #[test]
+        fn non_string() -> Result<(), Box<dyn std::error::Error>> {
+            let s = "801";
+            let v = serde_json::from_str::<FixedP<3>>(s);
+
+            assert!(v.is_err());
+
+            let expected_error_msg = "invalid type: integer `801`, expected struct FixedP<3>";
+
+            assert!(format!("{}", v.unwrap_err()).starts_with(expected_error_msg));
+
+            Ok(())
+        }
     }
 }
