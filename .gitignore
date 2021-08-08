@@ -1,2 +1,6 @@
-/target
-/tarpaulin_report.html
+target/
+tarpaulin_report.html
+.idea/
+.vscode/
+**/*.rs.bk
+Cargo.lock

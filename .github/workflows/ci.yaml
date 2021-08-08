@@ -1,9 +1,9 @@
-name: Continuous integration
+name: CI
 
 on:
   push:
     branches:
-      - master
+      - main
       - staging
       - trying
   pull_request:
@@ -21,12 +21,15 @@ jobs:
         rust:
           - stable
           - beta
-          - 1.47.0  # MSRV
+            # MSRV
+          - 1.54.0
         experimental: [false]
+        cargo_flags: [--all-features]
         include:
           # Stop breakages in nightly to fail the workflow
           - rust: nightly
             experimental: true
+            cargo_flags: --all-features
 
     steps:
       - uses: actions/checkout@v2
@@ -37,18 +40,15 @@ jobs:
         with:
           profile: minimal
           toolchain: ${{ matrix.rust }}
-          override: true
           components: rustfmt
+          override: true
 
       - uses: actions-rs/cargo@v1
         with:
           command: build
+          args: ${{ matrix.cargo_flags }}
 
       - uses: actions-rs/cargo@v1
         with:
           command: test
-
-      - uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --all -- --check
+          args: ${{ matrix.cargo_flags }}
