@@ -11,10 +11,10 @@ categories = ["data-structures", "mathematics", "rust-patterns"]
 description = "A const type for fixed point arithmetic"
 readme = "README.md"
 exclude = [
-    ".gitignore",
-    "bors.toml",
-    ".mailmap",
-    "deny.toml",
+    "/.gitignore",
+    "/bors.toml",
+    "/.mailmap",
+    "/deny.toml",
     "/ci/**",
     "/.github/**",
 ]
