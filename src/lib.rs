@@ -171,7 +171,7 @@ impl<const P: Precision> From<Infallible> for Error<P> {
 /// /// _ => unreachable!(), // not yet available on stable
 /// #   _ => FixedP::zero(), // workaround for panicking on stable
 /// };
-/// const TEN_N_HALF: FixedP<4> = match FixedP::from_units_frac(10, 5) {
+/// const TEN_N_HALF: FixedP<4> = match FixedP::from_units_frac(10, 5000) {
 ///     Ok(n) => n,
 /// /// _ => unreachable!(), // not yet available on stable
 /// #   _ => FixedP::zero(), // workaround for panicking on stable
