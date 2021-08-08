@@ -509,7 +509,7 @@ impl<const P: Precision> core::fmt::Debug for FixedP<P> {
     /// fractional parts as well as the maximum values for each and the
     /// internal representation.
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
-        f.debug_struct("FixedP")
+        f.debug_struct(&format!("FixedP<{}>", P))
             .field("units", &self.units())
             .field("frac", &self.frac())
             .field("unit_bits", &Self::UNIT_BITS)
@@ -686,6 +686,19 @@ mod test {
         }
 
         #[test]
+        fn addition_assignment() -> Result<(), Error<P>> {
+            let mut a = FixedP::from_units_frac(2, 1)?;
+            let b = FixedP::from_units_frac(6, 4)?;
+
+            a += b;
+
+            assert_eq!(8, a.units());
+            assert_eq!(5, a.frac());
+
+            Ok(())
+        }
+
+        #[test]
         fn subtraction() -> Result<(), Error<P>> {
             let a = FixedP::from_units_frac(5, 2)?;
             let b = FixedP::from_units_frac(2, 1)?;
@@ -694,6 +707,19 @@ mod test {
 
             assert_eq!(3, res.units());
             assert_eq!(1, res.frac());
+
+            Ok(())
+        }
+
+        #[test]
+        fn subtraction_assignment() -> Result<(), Error<P>> {
+            let mut a = FixedP::from_units_frac(5, 2)?;
+            let b = FixedP::from_units_frac(2, 1)?;
+
+            a -= b;
+
+            assert_eq!(3, a.units());
+            assert_eq!(1, a.frac());
 
             Ok(())
         }
@@ -752,6 +778,15 @@ mod test {
 
             assert!(ZERO == zero_from_units);
             assert_eq!(ZERO, zero_from_units);
+
+            Ok(())
+        }
+
+        #[test]
+        fn default_is_zero() -> Result<(), Error<P>> {
+            let zero_from_units = FixedP::from_units(0)?;
+
+            assert_eq!(FixedP::<P>::default(), zero_from_units);
 
             Ok(())
         }
@@ -877,6 +912,34 @@ mod test {
                 &format!("{}", val),
                 &format!("12.{:0width$}", 0, width = (P as usize))
             );
+
+            Ok(())
+        }
+
+        #[test]
+        fn debug() -> Result<(), Error<P>> {
+            let val = FixedP::from_units_frac(12, 3)?;
+
+            let debug_s = format!(
+                "FixedP<{P}> {{ \
+                units: {units}, \
+                frac: {frac}, \
+                unit_bits: {unit_bits}, \
+                frac_bits: {frac_bits}, \
+                unit_max: {unit_max}, \
+                frac_max: {frac_max}, \
+                bitvalue: {bitvalue} }}",
+                P = P,
+                units = &val.units(),
+                frac = &val.frac(),
+                unit_bits = &FixedP::<P>::UNIT_BITS,
+                frac_bits = &FixedP::<P>::FRAC_BITS,
+                unit_max = &FixedP::<P>::UNIT_MAX,
+                frac_max = &FixedP::<P>::FRAC_MAX,
+                bitvalue = &val.n
+            );
+
+            assert_eq!(&format!("{:?}", val), &debug_s);
 
             Ok(())
         }
