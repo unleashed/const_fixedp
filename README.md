@@ -10,7 +10,7 @@
 
 This crate offers a basic const unsigned fixed point arithmetic type.
 
-Please check out the documentation for examples.
+Please check out the [documentation](https://docs.rs/const_fixedp) for examples.
 
 ## Status
 
