@@ -5,15 +5,16 @@ edition = "2018"
 authors = ["Alejandro Martinez Ruiz <alex@flawedcode.org>"]
 license = "Apache-2.0"
 repository = "https://github.com/unleashed/const_fixedp"
+documentation = "https://docs.rs/const_fixedp"
 keywords = ["fixed-point", "fixed", "numeric", "mathematics", "const"]
 categories = ["data-structures", "mathematics", "rust-patterns"]
 description = "A const type for fixed point arithmetic"
 readme = "README.md"
 exclude = [
-    ".gitignore",
-    "bors.toml",
-    ".mailmap",
-    "deny.toml",
+    "/.gitignore",
+    "/bors.toml",
+    "/.mailmap",
+    "/deny.toml",
     "/ci/**",
     "/.github/**",
 ]
