@@ -10,6 +10,7 @@
 // Nothing of the above _has to_ be that way, so contributions are welcome!
 //
 #![deny(clippy::all, clippy::cargo)]
+#![doc(html_playground_url = "https://play.rust-lang.org/")]
 // Force all constant evaluations to be successful or fail compilation.
 #![forbid(const_err)]
 
