@@ -1,0 +1,37 @@
+[package]
+name = "const_fixedp"
+version = "0.1.0"
+edition = "2018"
+authors = ["Alejandro Martinez Ruiz <alex@flawedcode.org>"]
+license = "Apache-2.0"
+repository = "https://github.com/unleashed/const_fixedp"
+keywords = ["fixed-point", "fixed", "numeric", "mathematics", "const"]
+categories = ["data-structures", "mathematics", "rust-patterns"]
+description = "A const type for fixed point arithmetic"
+readme = "README.md"
+exclude = [
+    ".gitignore",
+    "bors.toml",
+    ".mailmap",
+    "deny.toml",
+    "/ci/**",
+    "/.github/**",
+]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+default = []
+# "serde" is an optional feature.
+
+[dependencies]
+thiserror = "1"
+serde = { version = "1", optional = true }
+
+[dev-dependencies]
+# use some actual format for tests
+serde_json = "1"
+
+[badges]
+codecov = { repository = "unleashed/const_fixedp" }
+maintenance = { status = "experimental" }

@@ -1,0 +1,5 @@
+# Note: audit statuses are only triggered in specific cases, so can't use here
+status = ["ci (stable, false, --all-features)", "ci (beta, false, --all-features)", "clippy_check", "rustfmt"]
+pr_status = ["ci (stable, false, --all-features)", "ci (beta, false, --all-features)", "clippy_check", "rustfmt"]
+delete_merged_branches = true
+use_squash_merge = false
